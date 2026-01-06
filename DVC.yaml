@@ -1,25 +1,25 @@
 stages:
-  prepare:
-    cmd: python scripts/prepare.py
+  import:
+    cmd: python Data_Import.py
     deps:
-      - scripts/prepare.py
-      - data/raw/data.csv
+      - Data_Import.py
+      - california_housing.csv
     outs:
       - data/processed/data.csv
 
   train:
-    cmd: python scripts/train.py
+    cmd: python Training_script.py
     deps:
-      - scripts/train.py
+      - Training_script.py
       - data/processed/data.csv
       - params.yaml
     outs:
       - models/model.pkl
 
   evaluate:
-    cmd: python scripts/evaluate.py
+    cmd: python Evaluation.py
     deps:
-      - scripts/evaluate.py
+      - Evaluation.py
       - models/model.pkl
       - data/processed/data.csv
       - params.yaml
